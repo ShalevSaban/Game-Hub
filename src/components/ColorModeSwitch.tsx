@@ -6,6 +6,7 @@ const ColorModeSwitch = () => {
   return (
     <HStack>
       <Switch
+        whiteSpace="nowrap"
         isChecked={colorMode == "dark"}
         onChange={toggleColorMode}
         colorScheme="green"
