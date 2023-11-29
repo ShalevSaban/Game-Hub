@@ -5,6 +5,8 @@ interface Props {
   children: ReactNode;
 }
 
+//Preventing duplication in style at GameCard and skeleton
+
 const GameCardContainer = ({ children }: Props) => {
   return (
     <Box borderRadius={10} overflow="hidden">

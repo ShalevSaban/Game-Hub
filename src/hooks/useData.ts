@@ -8,9 +8,9 @@ interface FetchResponse<T> {
 }
 
 const useData = <T>(
-  endpoint: string,
-  requestConfig?: AxiosRequestConfig,
-  deps?: any[]
+  endpoint: string, // genres,games ...
+  requestConfig?: AxiosRequestConfig, // for communication between genre & game grid (for example) 3 dots for more options before
+  deps?: any[] // for use effect (update when deps changes)
 ) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState([]);
@@ -23,8 +23,8 @@ const useData = <T>(
       setLoading(true);
       apiClient
         .get<FetchResponse<T>>(endpoint, {
-          signal: controller.signal,
-          ...requestConfig,
+          signal: controller.signal, // for cancelation option
+          ...requestConfig, // for communication between genre & game grid (for example) 3 dots for more options like platform..
         })
         .then((res) => {
           setData(res.data.results);
@@ -38,7 +38,7 @@ const useData = <T>(
 
       return () => controller.abort();
     },
-    deps ? [...deps] : []
+    deps ? [...deps] : [] //update when deps changes
   );
 
   return { data, error, isLoading };
